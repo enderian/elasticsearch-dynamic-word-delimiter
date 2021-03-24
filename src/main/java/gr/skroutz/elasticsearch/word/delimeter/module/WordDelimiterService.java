@@ -1,4 +1,4 @@
-package org.elasticsearch.module;
+package gr.skroutz.elasticsearch.word.delimeter.module;
 
 import org.elasticsearch.common.component.AbstractLifecycleComponent;
 import org.elasticsearch.common.inject.Inject;

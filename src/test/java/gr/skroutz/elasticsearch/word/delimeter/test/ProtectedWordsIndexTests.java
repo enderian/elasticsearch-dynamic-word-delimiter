@@ -1,5 +1,7 @@
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.test;
 
+import gr.skroutz.elasticsearch.word.delimeter.plugin.WordDelimiterPlugin;
+import gr.skroutz.elasticsearch.word.delimeter.support.WordDelimiterActionListener;
 import org.elasticsearch.Version;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
@@ -14,15 +16,12 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.test.ESIntegTestCase;
 import java.io.StringReader;
-import org.elasticsearch.action.support.WordDelimiterActionListener;
-import org.elasticsearch.plugin.WordDelimiterPlugin;
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope.Scope;
 
 import static org.elasticsearch.common.settings.Settings.builder;
 
 import static org.elasticsearch.test.ESTokenStreamTestCase.assertTokenStreamContents;
-import static org.skroutz.elasticsearch.index.analysis.AnalysisTestsHelper.filterFactory;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.analysis;
 
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;

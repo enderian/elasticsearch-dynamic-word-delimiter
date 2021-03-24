@@ -1,5 +1,6 @@
-package org.elasticsearch.module;
+package gr.skroutz.elasticsearch.word.delimeter.module;
 
+import gr.skroutz.elasticsearch.word.delimeter.support.WordDelimiterActionListener;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.logging.Loggers;
 import org.elasticsearch.common.settings.Settings;
@@ -8,7 +9,6 @@ import org.elasticsearch.common.util.concurrent.AbstractRunnable;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchType;
-import org.elasticsearch.action.support.WordDelimiterActionListener;
 
 public class WordDelimiterRunnable extends AbstractRunnable {
   public static final TimeValue REFRESH_INTERVAL = TimeValue.timeValueMinutes(5);

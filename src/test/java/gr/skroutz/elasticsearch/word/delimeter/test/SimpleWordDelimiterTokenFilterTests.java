@@ -1,5 +1,6 @@
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.test;
 
+import gr.skroutz.elasticsearch.word.delimeter.analysis.WordDelimiterTokenFilterFactory;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.hamcrest.MatcherAssert;
 import org.elasticsearch.Version;
@@ -25,7 +26,7 @@ public class SimpleWordDelimiterTokenFilterTests extends ESIntegTestCase {
         .put("path.home", "/")
         .build();
 
-    TokenFilterFactory filterFactory = filterFactory(indexSettings, "my_word_delimiter");
+    TokenFilterFactory filterFactory = AnalysisTestsHelper.filterFactory(indexSettings, "my_word_delimiter");
 
     MatcherAssert.assertThat(filterFactory, instanceOf(WordDelimiterTokenFilterFactory.class));
   }

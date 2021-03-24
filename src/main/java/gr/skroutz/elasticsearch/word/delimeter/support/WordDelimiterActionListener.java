@@ -1,10 +1,10 @@
-package org.elasticsearch.action.support;
+package gr.skroutz.elasticsearch.word.delimeter.support;
 
-import org.elasticsearch.common.logging.Loggers;
-import org.elasticsearch.search.SearchHit;
+import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.search.SearchResponse;
-import org.apache.logging.log4j.Logger;
+import org.elasticsearch.common.logging.Loggers;
+import org.elasticsearch.search.SearchHit;
 
 import java.util.HashSet;
 import java.util.Set;

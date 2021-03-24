@@ -15,12 +15,13 @@
  * limitations under the License.
  */
 
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.analysis;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 
+import gr.skroutz.elasticsearch.word.delimeter.support.WordDelimiterActionListener;
 import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
@@ -33,7 +34,6 @@ import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.ArrayUtil;
 import org.apache.lucene.util.AttributeSource;
 import org.apache.lucene.util.InPlaceMergeSorter;
-import org.elasticsearch.action.support.WordDelimiterActionListener;
 
 /**
  * Splits words into subwords and performs optional transformations on subword

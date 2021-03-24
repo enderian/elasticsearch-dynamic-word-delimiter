@@ -1,18 +1,18 @@
-package org.elasticsearch.plugin;
+package gr.skroutz.elasticsearch.word.delimeter.plugin;
 
+import gr.skroutz.elasticsearch.word.delimeter.module.WordDelimiterRunnable;
+import gr.skroutz.elasticsearch.word.delimeter.module.WordDelimiterService;
 import org.elasticsearch.common.settings.Setting;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
 import org.elasticsearch.indices.analysis.AnalysisModule;
-import org.elasticsearch.module.WordDelimiterRunnable;
 import org.elasticsearch.plugins.AnalysisPlugin;
 import org.elasticsearch.common.component.LifecycleComponent;
-import org.elasticsearch.module.WordDelimiterService;
 import org.elasticsearch.plugins.Plugin;
 
 import java.util.*;
 import java.util.function.Function;
 
-import org.skroutz.elasticsearch.index.analysis.WordDelimiterTokenFilterFactory;
+import gr.skroutz.elasticsearch.word.delimeter.analysis.WordDelimiterTokenFilterFactory;
 
 public class WordDelimiterPlugin extends Plugin implements AnalysisPlugin {
 

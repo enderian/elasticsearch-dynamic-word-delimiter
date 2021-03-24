@@ -1,4 +1,4 @@
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.analysis;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -16,8 +16,6 @@ package org.skroutz.elasticsearch.index.analysis;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import static org.skroutz.elasticsearch.index.analysis.WordDelimiterFilter.*;
 
 /**
  * A BreakIterator-like API for iterating over subwords in text, according to WordDelimiterFilter rules.
@@ -77,16 +75,16 @@ public final class WordDelimiterIterator {
     for (int i = 0; i < 256; i++) {
       byte code = 0;
       if (Character.isLowerCase(i)) {
-        code |= LOWER;
+        code |= WordDelimiterFilter.LOWER;
       }
       else if (Character.isUpperCase(i)) {
-        code |= UPPER;
+        code |= WordDelimiterFilter.UPPER;
       }
       else if (Character.isDigit(i)) {
-        code |= DIGIT;
+        code |= WordDelimiterFilter.DIGIT;
       }
       if (code == 0) {
-        code = SUBWORD_DELIM;
+        code = WordDelimiterFilter.SUBWORD_DELIM;
       }
       tab[i] = code;
     }
@@ -126,7 +124,7 @@ public final class WordDelimiterIterator {
 
     int lastType = 0;
 
-    while (current < endBounds && (isSubwordDelim(lastType = charType(text[current])))) {
+    while (current < endBounds && (WordDelimiterFilter.isSubwordDelim(lastType = charType(text[current])))) {
       current++;
     }
 
@@ -164,9 +162,9 @@ public final class WordDelimiterIterator {
     int type = charType(text[current]);
     switch (type) {
       // return ALPHA word type for both lower and upper
-      case LOWER:
-      case UPPER:
-        return ALPHA;
+      case WordDelimiterFilter.LOWER:
+      case WordDelimiterFilter.UPPER:
+        return WordDelimiterFilter.ALPHA;
       default:
         return type;
     }
@@ -200,13 +198,13 @@ public final class WordDelimiterIterator {
       return false;
     }
 
-    if (!splitOnCaseChange && isAlpha(lastType) && isAlpha(type)) {
+    if (!splitOnCaseChange && WordDelimiterFilter.isAlpha(lastType) && WordDelimiterFilter.isAlpha(type)) {
       // ALPHA->ALPHA: always ignore if case isn't considered.
       return false;
-    } else if (isUpper(lastType) && isAlpha(type)) {
+    } else if (WordDelimiterFilter.isUpper(lastType) && WordDelimiterFilter.isAlpha(type)) {
       // UPPER->letter: Don't split
       return false;
-    } else if (!splitOnNumerics && ((isAlpha(lastType) && isDigit(type)) || (isDigit(lastType) && isAlpha(type)))) {
+    } else if (!splitOnNumerics && ((WordDelimiterFilter.isAlpha(lastType) && WordDelimiterFilter.isDigit(type)) || (WordDelimiterFilter.isDigit(lastType) && WordDelimiterFilter.isAlpha(type)))) {
       // ALPHA->NUMERIC, NUMERIC->ALPHA :Don't split
       return false;
     }
@@ -233,11 +231,11 @@ public final class WordDelimiterIterator {
    * it yet, simply note it.
    */
   private void setBounds() {
-    while (startBounds < length && (isSubwordDelim(charType(text[startBounds])))) {
+    while (startBounds < length && (WordDelimiterFilter.isSubwordDelim(charType(text[startBounds])))) {
       startBounds++;
     }
 
-    while (endBounds > startBounds && (isSubwordDelim(charType(text[endBounds - 1])))) {
+    while (endBounds > startBounds && (WordDelimiterFilter.isSubwordDelim(charType(text[endBounds - 1])))) {
       endBounds--;
     }
     if (endsWithPossessive(endBounds)) {
@@ -257,8 +255,8 @@ public final class WordDelimiterIterator {
             pos > 2 &&
             text[pos - 2] == '\'' &&
             (text[pos - 1] == 's' || text[pos - 1] == 'S') &&
-            isAlpha(charType(text[pos - 3])) &&
-            (pos == endBounds || isSubwordDelim(charType(text[pos]))));
+            WordDelimiterFilter.isAlpha(charType(text[pos - 3])) &&
+            (pos == endBounds || WordDelimiterFilter.isSubwordDelim(charType(text[pos]))));
   }
 
   /**
@@ -282,8 +280,8 @@ public final class WordDelimiterIterator {
    */
   public static byte getType(int ch) {
     switch (Character.getType(ch)) {
-      case Character.UPPERCASE_LETTER: return UPPER;
-      case Character.LOWERCASE_LETTER: return LOWER;
+      case Character.UPPERCASE_LETTER: return WordDelimiterFilter.UPPER;
+      case Character.LOWERCASE_LETTER: return WordDelimiterFilter.LOWER;
 
       case Character.TITLECASE_LETTER:
       case Character.MODIFIER_LETTER:
@@ -291,12 +289,12 @@ public final class WordDelimiterIterator {
       case Character.NON_SPACING_MARK:
       case Character.ENCLOSING_MARK:  // depends what it encloses?
       case Character.COMBINING_SPACING_MARK:
-        return ALPHA;
+        return WordDelimiterFilter.ALPHA;
 
       case Character.DECIMAL_DIGIT_NUMBER:
       case Character.LETTER_NUMBER:
       case Character.OTHER_NUMBER:
-        return DIGIT;
+        return WordDelimiterFilter.DIGIT;
 
       // case Character.SPACE_SEPARATOR:
       // case Character.LINE_SEPARATOR:
@@ -306,7 +304,7 @@ public final class WordDelimiterIterator {
       // case Character.PRIVATE_USE:
 
       case Character.SURROGATE:  // prevent splitting
-        return ALPHA|DIGIT;
+        return WordDelimiterFilter.ALPHA| WordDelimiterFilter.DIGIT;
 
       // case Character.DASH_PUNCTUATION:
       // case Character.START_PUNCTUATION:
@@ -320,7 +318,7 @@ public final class WordDelimiterIterator {
       // case Character.INITIAL_QUOTE_PUNCTUATION:
       // case Character.FINAL_QUOTE_PUNCTUATION:
 
-      default: return SUBWORD_DELIM;
+      default: return WordDelimiterFilter.SUBWORD_DELIM;
     }
   }
 }

@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.test;
 
 import org.elasticsearch.Version;
 import org.elasticsearch.cluster.metadata.IndexMetaData;
@@ -30,7 +30,7 @@ import org.elasticsearch.test.ESTokenStreamTestCase;
 import java.io.IOException;
 import java.io.StringReader;
 
-import static org.skroutz.elasticsearch.index.analysis.AnalysisTestsHelper.filterFactory;
+import static gr.skroutz.elasticsearch.word.delimeter.test.AnalysisTestsHelper.filterFactory;
 
 public class WordDelimiterTokenFilterFactoryTests extends ESTokenStreamTestCase {
 

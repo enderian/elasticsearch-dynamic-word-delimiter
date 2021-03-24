@@ -17,12 +17,13 @@
  * under the License.
  */
 
-package org.skroutz.elasticsearch.index.analysis;
+package gr.skroutz.elasticsearch.word.delimeter.test;
 
+import gr.skroutz.elasticsearch.word.delimeter.plugin.WordDelimiterPlugin;
 import org.elasticsearch.index.Index;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.plugin.WordDelimiterPlugin;
+import org.elasticsearch.test.ESTestCase;
 
 import static org.elasticsearch.test.ESTestCase.TestAnalysis;
 
@@ -34,7 +35,7 @@ public class AnalysisTestsHelper {
 
   public static TokenFilterFactory filterFactory(Settings indexSettings, String filterName) throws IOException {
 
-      TestAnalysis analysis = createTestAnalysis(new Index("test", "_na_"),
+      TestAnalysis analysis = ESTestCase.createTestAnalysis(new Index("test", "_na_"),
               indexSettings, new WordDelimiterPlugin());
 
       return analysis.tokenFilter.get(filterName);

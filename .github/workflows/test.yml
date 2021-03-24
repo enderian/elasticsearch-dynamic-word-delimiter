@@ -28,4 +28,4 @@ jobs:
         with:
           java-version: 11
       - name: Run tests
-        run: mvn -Delasticsearch.version=${{ matrix.elasticsearch }} -Dlucene.version=${{ matrix.lucene }} test
+        run: mvn -B -Delasticsearch.version=${{ matrix.elasticsearch }} -Dlucene.version=${{ matrix.lucene }} test

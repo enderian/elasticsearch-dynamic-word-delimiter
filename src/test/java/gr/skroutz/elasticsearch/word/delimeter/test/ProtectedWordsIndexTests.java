@@ -7,7 +7,6 @@ import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.support.WriteRequest;
-import org.elasticsearch.cluster.metadata.IndexMetaData;
 import org.elasticsearch.common.settings.Settings;
 import org.apache.lucene.analysis.Tokenizer;
 import org.elasticsearch.index.analysis.TokenFilterFactory;
@@ -48,10 +47,10 @@ public class ProtectedWordsIndexTests extends ESIntegTestCase {
 
   public void testAddWordToIndex() throws Exception {
     Settings indexSettings = builder()
-        .put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
+        .put("index.version.created", Version.CURRENT)
         .put("index.analysis.filter.my_word_delimiter.type", "dynamic_word_delimiter")
         .build();
-    TokenFilterFactory filterFactory = filterFactory(indexSettings, FILTER_NAME);
+    TokenFilterFactory filterFactory = AnalysisTestsHelper.filterFactory(indexSettings, FILTER_NAME);
 
     createIndex(INDEX_NAME);
     ensureGreen();
@@ -75,10 +74,10 @@ public class ProtectedWordsIndexTests extends ESIntegTestCase {
   
   public void testRemoveWordFromIndex() throws Exception {
     Settings indexSettings = builder()
-        .put(IndexMetaData.SETTING_VERSION_CREATED, Version.CURRENT)
+        .put("index.version.created", Version.CURRENT)
         .put("index.analysis.filter.my_word_delimiter.type", "dynamic_word_delimiter")
         .build();
-    TokenFilterFactory filterFactory = filterFactory(indexSettings, FILTER_NAME);
+    TokenFilterFactory filterFactory = AnalysisTestsHelper.filterFactory(indexSettings, FILTER_NAME);
 
     createIndex(INDEX_NAME);
     ensureGreen();
